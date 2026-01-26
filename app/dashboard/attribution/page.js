@@ -109,8 +109,8 @@ export default function AttributionPage() {
                     {/* Economic Stress */}
                     {data?.economic?.stress && (
                         <div className={`p-6 rounded-2xl border ${data.economic.stress.level === "High"
-                                ? "bg-red-500/5 border-red-500/10"
-                                : "bg-amber-500/5 border-amber-500/10"
+                            ? "bg-red-500/5 border-red-500/10"
+                            : "bg-amber-500/5 border-amber-500/10"
                             }`}>
                             <h4 className={`font-semibold mb-2 ${data.economic.stress.level === "High" ? "text-red-400" : "text-amber-400"
                                 }`}>
@@ -127,17 +127,8 @@ export default function AttributionPage() {
 
             {/* Assumptions Panel */}
             <AssumptionsPanel
-                assumptions={[
-                    "Climate data from Open-Meteo (ERA5 reanalysis)",
-                    "Displacement data from UNHCR Population API",
-                    "Economic indicators from World Bank",
-                    "Causal structure based on domain expertise",
-                ]}
-                limitations={[
-                    "Data availability varies by region",
-                    "Economic data may have 1-2 year delay",
-                    "Conflict data not yet integrated",
-                ]}
+                pathways={attribution?.pathways}
+                assumptions={attribution?.assumptions}
             />
         </div>
     );

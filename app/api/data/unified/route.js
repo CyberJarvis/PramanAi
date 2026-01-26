@@ -137,27 +137,60 @@ function buildCausalAttribution({ climate, displacement, economic, conflict }) {
     // Normalize to 100%
     const total = climateContrib + economicContrib + contextualContrib;
 
+    // Calculate final percentages
+    const finalClimate = Math.round((climateContrib / total) * 100);
+    const finalEconomic = Math.round((economicContrib / total) * 100);
+    const finalContextual = Math.round((contextualContrib / total) * 100);
+
+    // Generate dynamic pathways
+    const pathways = [];
+    if (finalClimate > 40) {
+        pathways.push("Drought → Crop Failure → Food Prices → Displacement: Primary pathway through agricultural disruption");
+        pathways.push("Heat Stress → Labor Productivity Loss → Income Shock → Migration");
+    } else if (finalEconomic > 40) {
+        pathways.push("Inflation → Purchasing Power Decline → Livelihood Stress → Displacement");
+        pathways.push("Market Instability → Job Loss → Urban Migration");
+    } else if (finalContextual > 30) {
+        pathways.push("Political Instability → Security Risk → Forced Displacement");
+        pathways.push("Social Fragmentation → Community Support Collapse → Out-migration");
+    } else {
+        pathways.push("Multi-stressor amplification: Climate anomalies exacerbating pre-existing economic vulnerabilities");
+    }
+
+    // Generate dynamic assumptions
+    const assumptions = [
+        "Causal structure derived from domain expertise and prior studies",
+        "No unmeasured confounders between mediators",
+        "Temporal ordering: climate vulnerability precedes displacement effects"
+    ];
+
+    if (conflict?.count === 0) {
+        assumptions.push("Zero reported conflict events implies stability in security sector");
+    }
+
     return {
         factors: [
             {
                 factor: "Climate Stress",
-                contribution: Math.round((climateContrib / total) * 100),
+                contribution: finalClimate,
                 color: "#3b82f6",
                 description: "Drought, precipitation deficit, temperature anomalies",
             },
             {
                 factor: "Economic Mediators",
-                contribution: Math.round((economicContrib / total) * 100),
+                contribution: finalEconomic,
                 color: "#f59e0b",
                 description: "Inflation, GDP changes, food prices",
             },
             {
                 factor: "Contextual Factors",
-                contribution: Math.round((contextualContrib / total) * 100),
+                contribution: finalContextual,
                 color: "#8b5cf6",
                 description: `Conflict events (${conflict?.count || 0}), governance, social factors`,
             },
         ],
+        pathways,
+        assumptions,
         methodology: "Structural Causal Model with multi-source data integration",
     };
 }

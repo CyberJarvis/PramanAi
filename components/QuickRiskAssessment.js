@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ALL_COUNTRIES as COUNTRIES } from "@/lib/countries";
+import RegionSelector from "@/components/RegionSelector";
 
 export default function QuickRiskAssessment({ onAssess }) {
     const [country, setCountry] = useState("Ethiopia");
@@ -51,19 +51,11 @@ export default function QuickRiskAssessment({ onAssess }) {
             </div>
 
             {/* Country Selector */}
-            <div>
-                <label className="block text-sm text-gray-400 mb-2">Select Country</label>
-                <select
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-white focus:outline-none focus:border-blue-500 appearance-none cursor-pointer"
-                >
-                    {COUNTRIES.map((c) => (
-                        <option key={c.name} value={c.name} className="bg-gray-900">
-                            {c.name}
-                        </option>
-                    ))}
-                </select>
+            <div className="w-full">
+                <RegionSelector
+                    currentRegion={country}
+                    onRegionChange={(c) => setCountry(c.name)}
+                />
             </div>
 
             {/* Sliders Grid */}
