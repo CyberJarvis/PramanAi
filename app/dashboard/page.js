@@ -6,6 +6,7 @@ import RegionSelector from "@/components/RegionSelector";
 import RiskMetricsCard from "@/components/RiskMetricsCard";
 import InteractiveRiskMap from "@/components/InteractiveRiskMap";
 import GlassCard from "@/components/ui/GlassCard";
+import RoleWelcomeBanner from "@/components/RoleWelcomeBanner";
 
 export default function DashboardPage() {
     const { region, data, loading, error, changeRegion } = useData();
@@ -14,6 +15,9 @@ export default function DashboardPage() {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8">
+            {/* Role-Based Welcome Banner */}
+            <RoleWelcomeBanner />
+
             {/* Header with Region Selector */}
             <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>

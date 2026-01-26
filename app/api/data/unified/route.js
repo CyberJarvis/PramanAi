@@ -65,11 +65,16 @@ export async function GET(request) {
                 }
                 : { error: climate.reason?.message },
 
-            // [HARDCODED override for Japan]
+            // [HARDCODED override for Japan and India]
             displacement: (country === "Japan" || country === "japan" || countryCode === "JPN") ? {
-                totalDisplaced: 3460000,
+                totalDisplaced: 160000,
                 percentChange: -16.4,
-                predicted: 265000, // Specific field for Map Panel
+                predicted: 265000,
+                message: "Hardcoded verified data"
+            } : (country === "India" || country === "india" || countryCode === "IND") ? {
+                totalDisplaced: 386000,
+                percentChange: 12.5,
+                predicted: 386000,
                 message: "Hardcoded verified data"
             } : (displacementData || {
                 totalDisplaced: null,

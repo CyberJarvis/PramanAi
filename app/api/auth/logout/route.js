@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
-export async function POST() {
-  const response = NextResponse.json({ message: "Logout successful" });
+// Clear auth cookie and redirect to login
+function createLogoutResponse(request) {
+  const loginUrl = new URL("/login", request.url);
+  const response = NextResponse.redirect(loginUrl);
 
   response.cookies.set("token", "", {
     httpOnly: true,
@@ -12,4 +14,14 @@ export async function POST() {
   });
 
   return response;
+}
+
+// GET /api/auth/logout - Direct link logout
+export async function GET(request) {
+  return createLogoutResponse(request);
+}
+
+// POST /api/auth/logout - JavaScript logout
+export async function POST(request) {
+  return createLogoutResponse(request);
 }
