@@ -4,7 +4,6 @@
 
 > A Causal AI System for predicting and analyzing climate shock-driven population displacement.
 
-![Project Banner](/public/file.svg)
 
 ## 🚀 Overview
 
