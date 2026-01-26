@@ -1,28 +1,50 @@
 import { NextResponse } from "next/server";
+import { jwtVerify } from "jose";
 
-export function middleware(request) {
+export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
-  // Protected routes
-  const protectedRoutes = ["/dashboard"];
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+  const JWT_SECRET = process.env.JWT_SECRET;
+  const key = new TextEncoder().encode(JWT_SECRET || "default_secret_fallback"); // Fallback or handle missing secret
 
-  // Auth routes (redirect to dashboard if logged in)
+  let payload = null;
+  if (token) {
+    try {
+      const { payload: verified } = await jwtVerify(token, key);
+      payload = verified;
+    } catch (error) {
+      console.error("Token verification failed:", error);
+      // Token is invalid, treat as unauthenticated
+    }
+  }
+
+  const role = payload?.role;
+
+  // Define route protections
+  const protectedRoutes = ["/dashboard"];
+  const adminRoutes = ["/admin"]; // Example admin route
   const authRoutes = ["/login", "/register"];
+
+  const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
+  const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
-  // Redirect to login if accessing protected route without token
-  if (isProtectedRoute && !token) {
+  // 1. Unauthenticated user trying to access protected routes
+  if ((isProtectedRoute || isAdminRoute) && !payload) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Redirect to dashboard if accessing auth routes with token
-  if (isAuthRoute && token) {
+  // 2. Authenticated user trying to access auth routes (login/register)
+  if (isAuthRoute && payload) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  // 3. Admin protection (Role-Based Access Control)
+  if (isAdminRoute && role !== "admin") {
+    // User is logged in but not an admin
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
@@ -30,5 +52,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/register"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/register"],
 };

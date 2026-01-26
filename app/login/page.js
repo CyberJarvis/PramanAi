@@ -51,10 +51,48 @@ export default function LoginPage() {
                     Back
                 </Link>
                 {/* Header */}
-                <div className="mb-8">
+                <div className="mb-6">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign in</h1>
                     <p className="text-gray-500">Welcome back! Please enter your details</p>
                 </div>
+
+                {/* Demo Credentials Box */}
+                <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-8">
+                    <p className="text-xs font-semibold text-blue-800 uppercase tracking-wider mb-3">Demo Credentials</p>
+                    <div className="grid grid-cols-2 gap-3">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setEmail("admin@example.com");
+                                setPassword("password123");
+                            }}
+                            className="flex flex-col items-start p-3 bg-white border border-blue-200 rounded-lg hover:border-blue-400 hover:shadow-sm transition-all text-left"
+                        >
+                            <div className="flex items-center gap-1.5 mb-1">
+                                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                                <span className="text-sm font-bold text-gray-900">Admin</span>
+                            </div>
+                            <span className="text-xs text-gray-500">admin@example.com</span>
+                            <span className="text-xs text-gray-400 mt-0.5">pass: password123</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setEmail("user@example.com");
+                                setPassword("password123");
+                            }}
+                            className="flex flex-col items-start p-3 bg-white border border-blue-200 rounded-lg hover:border-blue-400 hover:shadow-sm transition-all text-left"
+                        >
+                            <div className="flex items-center gap-1.5 mb-1">
+                                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                                <span className="text-sm font-bold text-gray-900">User</span>
+                            </div>
+                            <span className="text-xs text-gray-500">user@example.com</span>
+                            <span className="text-xs text-gray-400 mt-0.5">pass: password123</span>
+                        </button>
+                    </div>
+                </div>
+
                 {/* Google Button */}
                 <button type="button" className="btn-google mb-6">
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
