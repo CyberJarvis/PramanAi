@@ -1,4 +1,4 @@
-# PRAMAN AI 🌍
+# PRAMAN.AI 🌍
 
 **Policy-Ready Analytics for Migration & Adaptation Needs**
 
