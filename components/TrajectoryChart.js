@@ -70,7 +70,7 @@ export default function TrajectoryChart({
             <div className="flex items-start justify-between">
                 <div>
                     <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                        <span className="text-red-500">🎯</span> Counterfactual Forecast
+                        Counterfactual Forecast
                     </h2>
                     <p className="text-gray-400 mt-1">
                         Simulate how <strong className="text-white">policy interventions</strong> change displacement trajectories

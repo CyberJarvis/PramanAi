@@ -52,7 +52,7 @@ export default function CouncilPage() {
             {/* Header */}
             <div>
                 <h1 className="text-3xl font-bold text-white mb-2">
-                    ⚔️ Situation Room
+                    Situation Room
                 </h1>
                 <p className="text-gray-400">
                     Multi-stakeholder strategic council for policy analysis
@@ -62,7 +62,7 @@ export default function CouncilPage() {
             {/* Scenario Input */}
             <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-                    <h3 className="text-lg font-semibold text-white mb-4">📋 Scenario A</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Scenario A</h3>
                     <input
                         type="text"
                         value={scenarioA.name}
@@ -79,7 +79,7 @@ export default function CouncilPage() {
                 </div>
 
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-                    <h3 className="text-lg font-semibold text-white mb-4">📋 Scenario B</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Scenario B</h3>
                     <input
                         type="text"
                         value={scenarioB.name}

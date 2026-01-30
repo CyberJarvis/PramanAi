@@ -46,7 +46,6 @@ export default function QuickRiskAssessment({ onAssess }) {
         <div className="space-y-6">
             {/* Header */}
             <div className="flex items-center gap-3">
-                <span className="text-2xl">🎯</span>
                 <h2 className="text-2xl font-bold text-red-500">Quick Risk Assessment</h2>
             </div>
 
